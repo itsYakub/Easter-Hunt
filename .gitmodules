@@ -1,0 +1,4 @@
+[submodule "lib/raylib-cpp"]
+	path = lib/raylib-cpp
+	url = https://github.com/RobLoach/raylib-cpp.git
+	branch = Master
