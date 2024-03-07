@@ -18,39 +18,42 @@ class Egg {
 private:
     raylib::Window& m_Window;
 
-    const raylib::Vector2 m_Gravity;
+    raylib::Texture2D& m_Texture;
+    raylib::Rectangle m_BoundingRect;
+    raylib::Color m_Color;
 
-    raylib::Vector2 m_Position;
-    raylib::Vector2 m_Size;
+    const raylib::Vector2 m_Gravity;
     raylib::Vector2 m_Velocity;
 
 public:
-    Egg(raylib::Window& window, float position) : 
+    Egg(raylib::Window& window, raylib::Texture2D& texture, float position) : 
         m_Window(window),
+        m_Texture(texture),
+        m_BoundingRect(position, -128.0f, m_Texture.width, m_Texture.height),
+        m_Color(GetRandomValue(0, 255), GetRandomValue(0, 255), GetRandomValue(0, 255), 255),
         m_Gravity(0.0f, 1.6f),
-        m_Position(position, -128.0f),
-        m_Size(16.0f, 16.0f),
-        m_Velocity(0.0f, 0.0f) { }
+        m_Velocity(0.0f, 0.0f) { 
+            m_Texture.SetFilter(TEXTURE_FILTER_ANISOTROPIC_16X);
+        }
 
     void Update() {
         m_Velocity += m_Gravity * m_Window.GetFrameTime();
-        m_Position += m_Velocity;
+        m_BoundingRect.x += m_Velocity.x;
+        m_BoundingRect.y += m_Velocity.y;
     }    
 
     void Render() {
-        DrawCircleV(m_Position, 16.0f, WHITE);
+        m_Texture.Draw(
+            raylib::Rectangle(0.0f, 0.0f, m_Texture.width, m_Texture.height), 
+            raylib::Rectangle(m_BoundingRect.x, m_BoundingRect.y, m_Texture.width, m_Texture.height), 
+            raylib::Vector2::Zero(), 
+            0.0f, 
+            m_Color
+        );    
     }
 
-    raylib::Vector2 GetPosition() const {
-        return m_Position;
-    }
-
-    raylib::Vector2 GetSize() const {
-        return m_Size;
-    }
-
-    raylib::Rectangle GetCollider() const {
-        return raylib::Rectangle(m_Position, m_Size);
+    raylib::Rectangle GetRectangle() const {
+        return m_BoundingRect;
     }
 };
 
@@ -58,11 +61,13 @@ class Player {
 private:
     raylib::Window& m_Window;
 
-    const raylib::Vector2 m_Gravity;
+    raylib::Texture2D m_Texture;
+    raylib::Rectangle m_BoundingRect;
 
-    raylib::Vector2 m_Position;
-    raylib::Vector2 m_Size;
+    const raylib::Vector2 m_Gravity;
     raylib::Vector2 m_Velocity;
+
+    float m_Rotation;
 
     int m_Score;
     int m_Lives;
@@ -72,14 +77,15 @@ private:
 public:
     Player(raylib::Window& window) : 
         m_Window(window),
+        m_Texture("../res/txt/EasterHunt_Bunny.png"),
+        m_BoundingRect(m_Window.GetSize().x / 2.0f - m_Texture.width / 2.0f, m_Window.GetSize().y / 2.0f - m_Texture.height / 2.0f, m_Texture.width, m_Texture.height),
         m_Gravity(0.0f, 9.81f * 2),
-        m_Position(0.0f, 0.0f),
-        m_Size(64.0f, 64.0f),
         m_Velocity(0.0f, 0.0f),
+        m_Rotation(0.0f),
         m_Score(0),
         m_Lives(3),
-        m_Enabled(false) {
-            m_Position = m_Window.GetSize() / 2.0f - m_Size / 2.0f;
+        m_Enabled(false) { 
+            m_Texture.SetFilter(TEXTURE_FILTER_ANISOTROPIC_16X);
         }
 
     void Update() {
@@ -92,44 +98,41 @@ public:
             return;
         } 
 
-        if(m_Position.x + m_Size.x < 0.0f) {
-            m_Position.x = m_Window.GetSize().x;
-        } else if(m_Position.x > m_Window.GetSize().x) {
-            m_Position.x = 0.0f - m_Size.x;
+        if(m_BoundingRect.x + m_BoundingRect.width < 0.0f) {
+            m_BoundingRect.x = m_Window.GetSize().x + m_BoundingRect.width;
+        } else if(m_BoundingRect.x - m_BoundingRect.width > m_Window.GetSize().x) {
+            m_BoundingRect.x = 0.0f - m_BoundingRect.width;
         }
 
-        if(m_Position.y + m_Size.y >= m_Window.GetSize().y) {
-            m_Position.y = m_Window.GetSize().y - m_Size.y;
+        if(m_BoundingRect.y + m_BoundingRect.height >= m_Window.GetSize().y) {
+            m_BoundingRect.y = m_Window.GetSize().y - m_BoundingRect.height;
             m_Velocity.y = m_Velocity.y / 1.5f * -1.0f;
         }
 
-        if(raylib::Keyboard::IsKeyDown(KEY_SPACE) && m_Position.y + m_Size.y >= 0.0f) {
+        if(raylib::Keyboard::IsKeyDown(KEY_SPACE) && m_BoundingRect.y >= 0.0f) {
             m_Velocity.y -= m_Gravity.y * 2.0f * GetFrameTime();
         }
 
         m_Velocity.x = Lerp(m_Velocity.x, 8.0f * (raylib::Keyboard::IsKeyDown(KEY_D) - raylib::Keyboard::IsKeyDown(KEY_A)), 2.0f * m_Window.GetFrameTime());
+        m_Rotation = Lerp(m_Rotation, 30.0f * (raylib::Keyboard::IsKeyDown(KEY_D) - raylib::Keyboard::IsKeyDown(KEY_A)), 2.0f * m_Window.GetFrameTime());
 
         m_Velocity += m_Gravity * m_Window.GetFrameTime();
-        m_Position += m_Velocity;
+        m_BoundingRect.x += m_Velocity.x;
+        m_BoundingRect.y += m_Velocity.y;
     }
 
     void Render() {
-        raylib::Rectangle rect(m_Position, m_Size);
-        rect.Draw(RED);
-
-        DrawText(TextFormat("Score: %i\nLives: %i", m_Score, m_Lives), 0, 0, 16, RAYWHITE);
+        m_Texture.Draw(
+            raylib::Rectangle(0.0f, 0.0f, m_Texture.width, m_Texture.height), 
+            raylib::Rectangle(m_BoundingRect.x + m_Texture.width / 2.0f, m_BoundingRect.y + m_Texture.height / 2.0f, m_Texture.width, m_Texture.height), 
+            raylib::Vector2(m_Texture.width, m_Texture.height) / 2.0f, 
+            m_Rotation, 
+            WHITE
+        );
     }
 
-    raylib::Vector2 GetPosition() const {
-        return m_Position;
-    }
-
-    raylib::Vector2 GetSize() const {
-        return m_Size;
-    }
-
-    raylib::Rectangle GetCollider() const {
-        return raylib::Rectangle(m_Position, m_Size);
+    raylib::Rectangle GetRectangle() const {
+        return m_BoundingRect;
     }
 
     void IncrementScore() {
@@ -152,6 +155,7 @@ public:
 class EggController {
 private:
     raylib::Window& m_Window;
+    raylib::Texture2D m_EggTexture;
 
     std::vector<std::unique_ptr<Egg>> m_EggList;
 
@@ -162,15 +166,18 @@ private:
 
 public:
     EggController(raylib::Window& window) :
-        m_Window(window), m_EggList(0), m_EggSpawnBoundOffset(128.0f), m_EggSpawnDelayTime(2.4f), m_EggSpawnDelayTimer(6.4f) { }
+        m_Window(window), 
+        m_EggTexture("../res/txt/EasterHunt_Egg.png"),
+        m_EggList(0), 
+        m_EggSpawnBoundOffset(128.0f), 
+        m_EggSpawnDelayTime(2.4f), 
+        m_EggSpawnDelayTimer(6.4f) { }
 
     void Update() {
         m_EggSpawnDelayTimer.Process(m_Window.GetFrameTime());
 
         if(m_EggSpawnDelayTimer.Finished()) {
-            // ATTENTION: This code can work badly in the future
-            // The values from 1 to 9 were based on the current window width: 1024
-            m_EggList.push_back(std::make_unique<Egg>(m_Window, GetRandomValue(1, 9) * 100));
+            m_EggList.push_back(std::make_unique<Egg>(m_Window, m_EggTexture, GetRandomValue(1, m_Window.GetSize().y / 100.0f - 1) * 100));
             m_EggSpawnDelayTimer.Restart(m_EggSpawnDelayTime);
         }
 
@@ -189,23 +196,17 @@ public:
         return m_EggList;
     }
 
-    void CheckEggCatch(int index, Player& player) {
+    // TODO(Yakub):
+    // Maybe add some functions that erases the eggs based on their memory address, 
+    // so you don't need to use indexing anymore.
+    // For now though, let's stay with this solution.
+    void EggListPopAtIndex(int index) {
         m_EggList.erase(m_EggList.begin() + index);
-        player.IncrementScore();
-        
-        TraceLog(LOG_INFO, TextFormat("Egg %i was caught", index));
-    }
-
-    void CheckEggCrash(int index, Player& player) {
-        m_EggList.erase(m_EggList.begin() + index);
-        player.DecrementLives();
-
-        TraceLog(LOG_INFO, TextFormat("Egg %i has crashed", index));
     }
 };
 
 int main(int argc, char** argv) {
-    raylib::Window window(1024, 1024, "Raylib 5.0.0 - Easter Hunt 1.0.0", FLAG_VSYNC_HINT | FLAG_WINDOW_RESIZABLE);
+    raylib::Window window(786, 786, "Raylib 5.0.0 - Easter Hunt 1.0.0", FLAG_VSYNC_HINT | FLAG_WINDOW_RESIZABLE | FLAG_MSAA_4X_HINT);
     
     Player player(window);
     EggController eggController(window);
@@ -215,16 +216,18 @@ int main(int argc, char** argv) {
         eggController.Update();
 
         for(int i = 0; i < eggController.GetEggList().size(); i++) {
-            if(player.GetCollider().CheckCollision(eggController.GetEggList().at(i)->GetCollider())) {
-                eggController.CheckEggCatch(i, player);
+            auto egg = eggController.GetEggList().at(i).get();
+
+            if(player.GetRectangle().CheckCollision(egg->GetRectangle())) {
+                eggController.EggListPopAtIndex(i);
             }
 
-            if(eggController.GetEggList().at(i)->GetPosition().y > window.GetSize().y) {
-                eggController.CheckEggCrash(i, player);
+            if(egg->GetRectangle().y > window.GetSize().y) {
+                eggController.EggListPopAtIndex(i);
             }
         }
  
-        window.BeginDrawing().ClearBackground(BLACK);
+        window.BeginDrawing().ClearBackground(SKYBLUE);
 
         player.Render();
         eggController.Render();

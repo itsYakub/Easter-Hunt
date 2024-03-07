@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.14)
 project(easter_hunt)
 
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 set(
     SOURCES
     ${CMAKE_SOURCE_DIR}/src/main.cpp
