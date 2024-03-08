@@ -20,10 +20,16 @@ private:
     const float m_EggSpawnDelayTime;
     Timer m_EggSpawnDelayTimer;
 
+    bool m_Enabled;
+
 public:
     EggController(raylib::Window& window);
+
     void Update();
     void Render();
+
+    bool Enabled();
+    void Enable();
 
     const std::vector<std::unique_ptr<Egg>>& GetEggList() const;
 

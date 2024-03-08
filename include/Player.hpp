@@ -21,8 +21,14 @@ private:
 
 public:
     Player(raylib::Window& window);
+
+    void OnEnable();
     void Update();
     void Render();
+
+    bool Enabled();
+    void Enable();
+
     raylib::Rectangle GetRectangle() const;
 
     void IncrementScore();

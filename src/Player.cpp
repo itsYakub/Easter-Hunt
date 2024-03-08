@@ -15,15 +15,14 @@ Player::Player(raylib::Window& window) :
         m_Texture.SetFilter(TEXTURE_FILTER_ANISOTROPIC_16X);
     }
 
+void Player::OnEnable() {
+    m_Velocity.y = -4.0f;
+}
+
 void Player::Update() {
     if(!m_Enabled) {
-        if(raylib::Keyboard::IsKeyPressed(KEY_SPACE)) {
-            m_Enabled = true;
-            m_Velocity.y = -4.0f;
-        }
-
         return;
-    } 
+    }
 
     if(m_BoundingRect.x + m_BoundingRect.width < 0.0f) {
         m_BoundingRect.x = m_Window.GetSize().x + m_BoundingRect.width;
@@ -56,6 +55,14 @@ void Player::Render() {
         m_Rotation, 
         WHITE
     );
+}
+
+bool Player::Enabled() {
+    return m_Enabled;
+}
+
+void Player::Enable() {
+    m_Enabled = true;
 }
 
 raylib::Rectangle Player::GetRectangle() const {

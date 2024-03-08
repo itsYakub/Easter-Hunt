@@ -11,6 +11,9 @@ set(
     ${CMAKE_SOURCE_DIR}/src/EggController.cpp
     ${CMAKE_SOURCE_DIR}/src/Player.cpp
     ${CMAKE_SOURCE_DIR}/src/Timer.cpp
+    ${CMAKE_SOURCE_DIR}/src/SceneMenager.cpp
+    ${CMAKE_SOURCE_DIR}/src/SceneGameplay.cpp
+    ${CMAKE_SOURCE_DIR}/src/SceneSplashScreen.cpp
 )
 
 set(
