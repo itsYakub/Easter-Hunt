@@ -1,3 +1,6 @@
+// External links:
+// > Color Palette: https://lospec.com/palette-list/vanilla-milkshake
+
 #include <vector>
 #include <memory>
 
@@ -26,11 +29,11 @@ private:
     raylib::Vector2 m_Velocity;
 
 public:
-    Egg(raylib::Window& window, raylib::Texture2D& texture, float position) : 
+    Egg(raylib::Window& window, raylib::Texture2D& texture, raylib::Color color, float position) : 
         m_Window(window),
         m_Texture(texture),
         m_BoundingRect(position, -128.0f, m_Texture.width, m_Texture.height),
-        m_Color(GetRandomValue(0, 255), GetRandomValue(0, 255), GetRandomValue(0, 255), 255),
+        m_Color(color),
         m_Gravity(0.0f, 1.6f),
         m_Velocity(0.0f, 0.0f) { 
             m_Texture.SetFilter(TEXTURE_FILTER_ANISOTROPIC_16X);
@@ -156,10 +159,9 @@ class EggController {
 private:
     raylib::Window& m_Window;
     raylib::Texture2D m_EggTexture;
+    const std::array<raylib::Color, 8> m_EggColorList;
 
     std::vector<std::unique_ptr<Egg>> m_EggList;
-
-    const float m_EggSpawnBoundOffset;
 
     const float m_EggSpawnDelayTime;
     Timer m_EggSpawnDelayTimer;
@@ -168,8 +170,8 @@ public:
     EggController(raylib::Window& window) :
         m_Window(window), 
         m_EggTexture("../res/txt/EasterHunt_Egg.png"),
+        m_EggColorList( { raylib::Color(108, 86, 113), raylib::Color(176, 169, 228), raylib::Color(249, 130, 132), raylib::Color(254, 170, 228), raylib::Color(172, 204, 228), raylib::Color(179, 227, 218), raylib::Color(176, 235, 147), raylib::Color(233, 245, 157) } ),
         m_EggList(0), 
-        m_EggSpawnBoundOffset(128.0f), 
         m_EggSpawnDelayTime(2.4f), 
         m_EggSpawnDelayTimer(6.4f) { }
 
@@ -177,7 +179,7 @@ public:
         m_EggSpawnDelayTimer.Process(m_Window.GetFrameTime());
 
         if(m_EggSpawnDelayTimer.Finished()) {
-            m_EggList.push_back(std::make_unique<Egg>(m_Window, m_EggTexture, GetRandomValue(1, m_Window.GetSize().y / 100.0f - 1) * 100));
+            m_EggList.push_back(std::make_unique<Egg>(m_Window, m_EggTexture, m_EggColorList.at(GetRandomValue(0, m_EggColorList.size() - 1)), GetRandomValue(1, m_Window.GetSize().y / 100.0f - 1) * 100));
             m_EggSpawnDelayTimer.Restart(m_EggSpawnDelayTime);
         }
 
@@ -227,7 +229,7 @@ int main(int argc, char** argv) {
             }
         }
  
-        window.BeginDrawing().ClearBackground(SKYBLUE);
+        window.BeginDrawing().ClearBackground(raylib::Color(172, 204, 228));
 
         player.Render();
         eggController.Render();
