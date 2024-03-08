@@ -7,10 +7,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(
     SOURCES
     ${CMAKE_SOURCE_DIR}/src/main.cpp
+    ${CMAKE_SOURCE_DIR}/src/Egg.cpp
+    ${CMAKE_SOURCE_DIR}/src/EggController.cpp
+    ${CMAKE_SOURCE_DIR}/src/Player.cpp
+    ${CMAKE_SOURCE_DIR}/src/Timer.cpp
 )
 
 set(
     INCLUDE_DIRECTORIES
+    ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/lib/raylib-cpp/include
     ${CMAKE_SOURCE_DIR}/lib/raylib-cpp/bin/_deps/raylib-src/src
 )
