@@ -9,8 +9,8 @@
 #include "Egg.hpp"
 #include "Timer.hpp"
 
-EggController::EggController(raylib::Window& window) :
-    m_Window(window), 
+EggController::EggController(Display& display) :
+    m_Display(display), 
     m_EggTexture("../res/txt/EasterHunt_Egg.png"),
     m_EggColorList( { raylib::Color(108, 86, 113), raylib::Color(176, 169, 228), raylib::Color(249, 130, 132), raylib::Color(254, 170, 228), raylib::Color(172, 204, 228), raylib::Color(179, 227, 218), raylib::Color(176, 235, 147), raylib::Color(233, 245, 157) } ),
     m_EggList(0), 
@@ -22,10 +22,10 @@ void EggController::Update() {
         return;
     }
 
-    m_EggSpawnDelayTimer.Process(m_Window.GetFrameTime());
+    m_EggSpawnDelayTimer.Process(m_Display.GetFrameTime());
 
     if(m_EggSpawnDelayTimer.Finished()) {
-        m_EggList.push_back(std::make_unique<Egg>(m_Window, m_EggTexture, m_EggColorList.at(GetRandomValue(0, m_EggColorList.size() - 1)), GetRandomValue(128, m_Window.GetSize().x - 128)));
+        m_EggList.push_back(std::make_unique<Egg>(m_Display, m_EggTexture, m_EggColorList.at(GetRandomValue(0, m_EggColorList.size() - 1)), GetRandomValue(128, m_Display.GetSize().x - 128)));
         m_EggSpawnDelayTimer.Restart(m_EggSpawnDelayTime);
     }
 

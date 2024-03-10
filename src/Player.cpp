@@ -2,10 +2,10 @@
 
 #include "raylib-cpp.hpp"
 
-Player::Player(raylib::Window& window) : 
-    m_Window(window),
+Player::Player(Display& display) : 
+    m_Display(display),
     m_Texture("../res/txt/EasterHunt_Bunny.png"),
-    m_BoundingRect(m_Window.GetSize().x / 2.0f - m_Texture.width / 2.0f, m_Window.GetSize().y / 2.0f - m_Texture.height / 2.0f, m_Texture.width, m_Texture.height),
+    m_BoundingRect(m_Display.GetSize().x / 2.0f - m_Texture.width / 2.0f, m_Display.GetSize().y / 2.0f - m_Texture.height / 2.0f, m_Texture.width, m_Texture.height),
     m_Gravity(0.0f, 9.81f * 2),
     m_Velocity(0.0f, 0.0f),
     m_Rotation(0.0f),
@@ -25,13 +25,13 @@ void Player::Update() {
     }
 
     if(m_BoundingRect.x + m_BoundingRect.width < 0.0f) {
-        m_BoundingRect.x = m_Window.GetSize().x + m_BoundingRect.width;
-    } else if(m_BoundingRect.x - m_BoundingRect.width > m_Window.GetSize().x) {
+        m_BoundingRect.x = m_Display.GetSize().x + m_BoundingRect.width;
+    } else if(m_BoundingRect.x - m_BoundingRect.width > m_Display.GetSize().x) {
         m_BoundingRect.x = 0.0f - m_BoundingRect.width;
     }
 
-    if(m_BoundingRect.y + m_BoundingRect.height >= m_Window.GetSize().y) {
-        m_BoundingRect.y = m_Window.GetSize().y - m_BoundingRect.height;
+    if(m_BoundingRect.y + m_BoundingRect.height >= m_Display.GetSize().y) {
+        m_BoundingRect.y = m_Display.GetSize().y - m_BoundingRect.height;
         m_Velocity.y = m_Velocity.y / 1.5f * -1.0f;
     }
 
@@ -39,10 +39,10 @@ void Player::Update() {
         m_Velocity.y -= m_Gravity.y * 2.0f * GetFrameTime();
     }
 
-    m_Velocity.x = Lerp(m_Velocity.x, 8.0f * (raylib::Keyboard::IsKeyDown(KEY_D) - raylib::Keyboard::IsKeyDown(KEY_A)), 2.0f * m_Window.GetFrameTime());
-    m_Rotation = Lerp(m_Rotation, 30.0f * (raylib::Keyboard::IsKeyDown(KEY_D) - raylib::Keyboard::IsKeyDown(KEY_A)), 2.0f * m_Window.GetFrameTime());
+    m_Velocity.x = Lerp(m_Velocity.x, 8.0f * (raylib::Keyboard::IsKeyDown(KEY_D) - raylib::Keyboard::IsKeyDown(KEY_A)), 2.0f * m_Display.GetFrameTime());
+    m_Rotation = Lerp(m_Rotation, 30.0f * (raylib::Keyboard::IsKeyDown(KEY_D) - raylib::Keyboard::IsKeyDown(KEY_A)), 2.0f * m_Display.GetFrameTime());
 
-    m_Velocity += m_Gravity * m_Window.GetFrameTime();
+    m_Velocity += m_Gravity * m_Display.GetFrameTime();
     m_BoundingRect.x += m_Velocity.x;
     m_BoundingRect.y += m_Velocity.y;
 }

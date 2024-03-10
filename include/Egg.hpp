@@ -1,10 +1,11 @@
 #pragma once
 
 #include "raylib-cpp.hpp"
+#include "Display.hpp"
 
 class Egg {
 private:
-    raylib::Window& m_Window;
+    Display& m_Display;
 
     raylib::Texture2D& m_Texture;
     raylib::Rectangle m_BoundingRect;
@@ -14,7 +15,7 @@ private:
     raylib::Vector2 m_Velocity;
 
 public:
-    Egg(raylib::Window& window, raylib::Texture2D& texture, raylib::Color color, float position);
+    Egg(Display& display, raylib::Texture2D& texture, raylib::Color color, float position);
     void Update();  
     void Render();
     raylib::Rectangle GetRectangle() const;

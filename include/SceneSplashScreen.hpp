@@ -7,9 +7,11 @@
 
 #include "Timer.hpp"
 
+#include "Display.hpp"
+
 class SceneSplashScreen : public Scene {
 private:
-    raylib::Window& m_Window;
+    Display& m_Display;
     SceneMenager& m_SceneMenager;
 
     raylib::Texture2D m_RaylibLogo;
@@ -17,7 +19,7 @@ private:
     Timer m_SwitchSceneTimer;
     
 public:
-    SceneSplashScreen(raylib::Window& window, SceneMenager& sceneMenager);
+    SceneSplashScreen(Display& display, SceneMenager& sceneMenager);
 
     void Update() override;    
     void Render() override;    

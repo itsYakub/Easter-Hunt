@@ -4,14 +4,14 @@
 
 #include "SceneMenager.hpp"
 
-SceneGameplay::SceneGameplay(raylib::Window& window, SceneMenager& sceneMenager) : 
-    m_Player(window),
-    m_EggController(window),
+SceneGameplay::SceneGameplay(Display& display, SceneMenager& sceneMenager) : 
+    m_Display(display),
+    m_SceneMenager(sceneMenager),
+    m_Player(display),
+    m_EggController(display),
     m_GameLogo("../res/txt/EasterHunt_Logo.png"),
-    m_LogoPosition(0.0f, 0.0f),
-    m_Window(window),
-    m_SceneMenager(sceneMenager) {
-        m_LogoPosition = raylib::Vector2(m_Window.GetSize().x / 2.0f, 128.0f);
+    m_LogoPosition(0.0f, 0.0f) {
+        m_LogoPosition = raylib::Vector2(m_Display.GetSize().x / 2.0f, 128.0f);
 }
 
 void SceneGameplay::Update() {
@@ -36,7 +36,7 @@ void SceneGameplay::Update() {
             m_EggController.EggListPopAtIndex(i);
         }
 
-        if(egg->GetRectangle().y > m_Window.GetSize().y) {
+        if(egg->GetRectangle().y > m_Display.GetSize().y) {
             m_EggController.EggListPopAtIndex(i);
         }
     }
@@ -45,7 +45,7 @@ void SceneGameplay::Update() {
 }   
 
 void SceneGameplay::Render() {
-    m_Window.ClearBackground(raylib::Color(172, 204, 228));
+    ClearBackground(raylib::Color(172, 204, 228));
 
     m_GameLogo.Draw(raylib::Vector2(m_LogoPosition.x - m_GameLogo.width / 2.0f, m_LogoPosition.y - m_GameLogo.height / 2.0f), WHITE);
 

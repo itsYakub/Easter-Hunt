@@ -7,20 +7,21 @@
 
 #include "Player.hpp"
 #include "EggController.hpp"
+#include "Display.hpp"
 
 class SceneGameplay : public Scene {
 private:
+    Display& m_Display;
+    SceneMenager& m_SceneMenager;
+
     Player m_Player;
     EggController m_EggController;
 
     raylib::Texture2D m_GameLogo;
     raylib::Vector2 m_LogoPosition;
-
-    raylib::Window& m_Window;
-    SceneMenager& m_SceneMenager;
     
 public:
-    SceneGameplay(raylib::Window& window, SceneMenager& sceneMenager);
+    SceneGameplay(Display& display, SceneMenager& sceneMenager);
 
     void Update() override;    
     void Render() override;    

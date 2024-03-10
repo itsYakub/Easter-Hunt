@@ -5,27 +5,61 @@
 
 #include "raylib-cpp.hpp"
 
+#include "Display.hpp"
+
 #include "SceneMenager.hpp"
 #include "SceneSplashScreen.hpp"
 
-int main(int argc, char** argv) {
-    const std::string title = "Raylib 5.0.0 - Easter Hunt 1.0.0";
+class Game {
+private:
+    const int WINDOW_WIDTH, DISPLAY_WIDTH;
+    const int WINDOW_HEIGHT, DISPLAY_HEIGHT;
+    const std::string TITLE;
 
-    raylib::Window window(786, 786, title.c_str(), FLAG_VSYNC_HINT | FLAG_WINDOW_RESIZABLE | FLAG_MSAA_4X_HINT);
+    raylib::Window window;
+    Display display;
+    SceneMenager sceneMenager;
 
-    SceneMenager sceneMenager(new SceneSplashScreen(window, sceneMenager));
-    
-    while(!WindowShouldClose()) {
-        window.SetTitle(TextFormat("%s (%iFPS)", title.c_str(), window.GetFPS()));
+public:
+    Game() :
+        WINDOW_WIDTH(786), DISPLAY_WIDTH(786),
+        WINDOW_HEIGHT(786), DISPLAY_HEIGHT(786),
+        TITLE("Raylib 5.0.0 - Easter Hunt 1.0.0"),
+        window(WINDOW_WIDTH, WINDOW_HEIGHT, TITLE, FLAG_VSYNC_HINT | FLAG_WINDOW_RESIZABLE | FLAG_MSAA_4X_HINT | FLAG_WINDOW_MAXIMIZED),
+        display(window, DISPLAY_WIDTH, DISPLAY_HEIGHT, TEXTURE_FILTER_TRILINEAR),
+        sceneMenager() {
+
+        }
+
+    void Run() {
+        sceneMenager.LoadScene(new SceneSplashScreen(display, sceneMenager));
+
+        while(!window.ShouldClose()) {
+            Update();
+            Render();
+        }
+
+    }
+
+private:
+    void Update() {
+        window.SetTitle(TextFormat("%s (%iFPS)", TITLE.c_str(), window.GetFPS()));
 
         sceneMenager.Update();
- 
-        window.BeginDrawing();
+    }
+
+    void Render() {
+        display.Begin();
 
         sceneMenager.Render();
 
-        window.EndDrawing();
+        display.End();
     }
+};
+
+int main(int argc, char** argv) {
+    Game game;
+    game.Run();
 
     return 0;
 }

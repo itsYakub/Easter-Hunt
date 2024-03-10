@@ -14,6 +14,8 @@ set(
     ${CMAKE_SOURCE_DIR}/src/SceneMenager.cpp
     ${CMAKE_SOURCE_DIR}/src/SceneGameplay.cpp
     ${CMAKE_SOURCE_DIR}/src/SceneSplashScreen.cpp
+    ${CMAKE_SOURCE_DIR}/src/Raygui.cpp    
+    ${CMAKE_SOURCE_DIR}/src/Display.cpp    
 )
 
 set(
@@ -21,6 +23,7 @@ set(
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/lib/raylib-cpp/include
     ${CMAKE_SOURCE_DIR}/lib/raylib-cpp/bin/_deps/raylib-src/src
+    ${CMAKE_SOURCE_DIR}/lib/raygui/src
 )
 
 set(

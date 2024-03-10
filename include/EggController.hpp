@@ -8,10 +8,11 @@
 
 #include "Egg.hpp"
 #include "Timer.hpp"
+#include "Display.hpp"
 
 class EggController {
 private:
-    raylib::Window& m_Window;
+    Display& m_Display;
     raylib::Texture2D m_EggTexture;
     const std::array<raylib::Color, 8> m_EggColorList;
 
@@ -23,7 +24,7 @@ private:
     bool m_Enabled;
 
 public:
-    EggController(raylib::Window& window);
+    EggController(Display& display);
 
     void Update();
     void Render();

@@ -2,9 +2,11 @@
 
 #include "raylib-cpp.hpp"
 
+#include "Display.hpp"
+
 class Player {
 private:
-    raylib::Window& m_Window;
+    Display& m_Display;
 
     raylib::Texture2D m_Texture;
     raylib::Rectangle m_BoundingRect;
@@ -20,7 +22,7 @@ private:
     bool m_Enabled;
 
 public:
-    Player(raylib::Window& window);
+    Player(Display& display);
 
     void OnEnable();
     void Update();
