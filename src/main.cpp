@@ -17,6 +17,7 @@ private:
     const std::string TITLE;
 
     raylib::Window window;
+    raylib::AudioDevice audio;
     Display display;
     SceneMenager sceneMenager;
 
@@ -26,19 +27,18 @@ public:
         WINDOW_HEIGHT(768), DISPLAY_HEIGHT(768),
         TITLE("Raylib 5.0.0 - Easter Hunt 1.0.0"),
         window(WINDOW_WIDTH, WINDOW_HEIGHT, TITLE, FLAG_VSYNC_HINT | FLAG_WINDOW_RESIZABLE | FLAG_MSAA_4X_HINT | FLAG_WINDOW_MAXIMIZED),
+        audio(),
         display(window, DISPLAY_WIDTH, DISPLAY_HEIGHT, TEXTURE_FILTER_TRILINEAR),
         sceneMenager() {
-
+            window.Maximize();
+            sceneMenager.LoadScene(new SceneSplashScreen(display, sceneMenager));
         }
 
     void Run() {
-        sceneMenager.LoadScene(new SceneSplashScreen(display, sceneMenager));
-
         while(!window.ShouldClose()) {
             Update();
             Render();
         }
-
     }
 
 private:

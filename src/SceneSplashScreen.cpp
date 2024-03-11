@@ -13,7 +13,7 @@ SceneSplashScreen::SceneSplashScreen(Display& display, SceneMenager& sceneMenage
     m_SceneMenager(sceneMenager),
     m_RaylibLogo("../res/raylib-cpp_256x256.png"),
     m_SwitchSceneTimer(5.0f) {
-
+        m_RaylibLogo.SetFilter(TEXTURE_FILTER_BILINEAR);
 }
 
 void SceneSplashScreen::Update() {

@@ -15,7 +15,7 @@ EggController::EggController(Display& display) :
     m_ColorList(),
     m_EggList(0), 
     m_EggSpawnDelayTime(2.0f), 
-    m_EggSpawnDelayTimer(5.0f) { }
+    m_EggSpawnDelayTimer(4.0f) { }
 
 void EggController::Update() {
     if(!m_Enabled) {
@@ -32,6 +32,9 @@ void EggController::Update() {
     for(int i = 0; i < m_EggList.size(); i++) {
         m_EggList.at(i)->Update();
     }
+
+    m_EggSpawnDelayTime -= m_Display.GetFrameTime() * 0.02f;
+    m_EggSpawnDelayTime = Clamp(m_EggSpawnDelayTime, 0.5f, 2.0f);
 }
 
 void EggController::Render() {

@@ -50,6 +50,7 @@
         "thread": "cpp",
         "cinttypes": "cpp",
         "typeinfo": "cpp",
-        "*.m": "cpp"
+        "*.m": "cpp",
+        "any": "cpp"
     }
 }

@@ -19,7 +19,7 @@ private:
 
     std::vector<std::unique_ptr<Egg>> m_EggList;
 
-    const float m_EggSpawnDelayTime;
+    float m_EggSpawnDelayTime;
     Timer m_EggSpawnDelayTimer;
 
     bool m_Enabled;
@@ -40,4 +40,8 @@ public:
     // so you don't need to use indexing anymore.
     // For now though, let's stay with this solution.
     void EggListPopAtIndex(int index);
+
+    // TODO(Yakub):
+    // Add some functionality for decreasing the time delay between spawning the eggs, to make the game more difficult over time
+    // Maybe base it on the current player score, or on the current game time
 };

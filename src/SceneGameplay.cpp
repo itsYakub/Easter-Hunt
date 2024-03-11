@@ -14,6 +14,7 @@ SceneGameplay::SceneGameplay(Display& display, SceneMenager& sceneMenager) :
     m_TooltipText(GetFontDefault(), "- - - Press SPACE to start - - -", 32, 2, BLACK),
     m_TooltipPosition(raylib::Vector2(m_Display.GetSize().x / 2.0f - m_TooltipText.MeasureEx().x / 2.0, 512.0f)),
     m_Background(display) {
+        m_GameLogo.SetFilter(TEXTURE_FILTER_BILINEAR);
         m_LogoPosition = raylib::Vector2(m_Display.GetSize().x / 2.0f, 128.0f);
 }
 
@@ -27,7 +28,7 @@ void SceneGameplay::Update() {
 
     else if(GameStarted()) {
         m_LogoPosition.y = Lerp(m_LogoPosition.y, -m_GameLogo.height, 0.8f * GetFrameTime());
-        m_TooltipPosition.y = Lerp(m_TooltipPosition.y, m_Display.GetSize().y + m_TooltipText.MeasureEx().y, 0.8f * GetFrameTime());
+        m_TooltipPosition.y = Lerp(m_TooltipPosition.y, m_Display.GetSize().y + m_TooltipText.MeasureEx().y, GetFrameTime());
     }
 
     m_Player.Update();
@@ -38,10 +39,12 @@ void SceneGameplay::Update() {
 
         if(m_Player.GetRectangle().CheckCollision(egg->GetRectangle())) {
             m_EggController.EggListPopAtIndex(i);
+            m_Player.IncrementScore();
         }
 
         if(egg->GetRectangle().y > m_Display.GetSize().y) {
             m_EggController.EggListPopAtIndex(i);
+            m_Player.DecrementLives();
         }
     }
 

@@ -9,7 +9,7 @@ Egg::Egg(Display& display, raylib::Texture2D& texture, raylib::Color color, floa
     m_Color(color),
     m_Gravity(0.0f, 1.6f),
     m_Velocity(0.0f, 0.0f) { 
-        m_Texture.SetFilter(TEXTURE_FILTER_ANISOTROPIC_16X);
+        m_Texture.SetFilter(TEXTURE_FILTER_BILINEAR);
     }
 
 void Egg::Update() {

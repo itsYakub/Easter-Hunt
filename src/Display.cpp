@@ -9,7 +9,7 @@ Display::Display(raylib::Window& window) :
     WIDTH(768),
     HEIGHT(768),
     m_RenderTexture(WIDTH, HEIGHT) {
-        m_RenderTexture.GetTexture().SetFilter(TEXTURE_FILTER_TRILINEAR);
+        m_RenderTexture.GetTexture().SetFilter(TEXTURE_FILTER_BILINEAR);
     }
 
 Display::Display(raylib::Window& window, const int width, const int height) :

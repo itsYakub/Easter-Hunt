@@ -11,12 +11,17 @@ private:
     raylib::Texture2D m_Texture;
     raylib::Rectangle m_BoundingRect;
 
+    raylib::Texture2D m_EggTexture;
+    raylib::Texture2D m_BrokenEggTexture;
+
     const raylib::Vector2 m_Gravity;
     raylib::Vector2 m_Velocity;
 
     float m_Rotation;
-
+    
     int m_Score;
+    
+    const int LIVES_MAX;
     int m_Lives;
 
     bool m_Enabled;
@@ -38,4 +43,9 @@ public:
     
     int GetScore() const;
     int GetLives() const;
+
+private:
+    void RenderPlayer();
+    void RenderLives();
+    void RednerScore();
 };
