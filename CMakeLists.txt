@@ -14,8 +14,9 @@ set(
     ${CMAKE_SOURCE_DIR}/src/SceneMenager.cpp
     ${CMAKE_SOURCE_DIR}/src/SceneGameplay.cpp
     ${CMAKE_SOURCE_DIR}/src/SceneSplashScreen.cpp
-    ${CMAKE_SOURCE_DIR}/src/Raygui.cpp    
     ${CMAKE_SOURCE_DIR}/src/Display.cpp    
+    ${CMAKE_SOURCE_DIR}/src/Background.cpp    
+    ${CMAKE_SOURCE_DIR}/src/ColorList.cpp    
 )
 
 set(

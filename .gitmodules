@@ -2,7 +2,3 @@
 	path = lib/raylib-cpp
 	url = https://github.com/RobLoach/raylib-cpp.git
 	branch = Master
-[submodule "lib/raygui"]
-	path = lib/raygui
-	url = https://github.com/raysan5/raygui.git
-	branch = master

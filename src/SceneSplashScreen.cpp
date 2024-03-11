@@ -4,7 +4,6 @@
 #include <array>
 
 #include "raylib-cpp.hpp"
-#include "raygui.h"
 
 #include "SceneMenager.hpp"
 #include "SceneGameplay.hpp"
@@ -36,8 +35,15 @@ void SceneSplashScreen::Render() {
         WHITE
     );
 
-    GuiSetStyle(LABEL, TEXT_ALIGNMENT, TEXT_ALIGN_CENTER);
+    raylib::Text splashScreenText;
+    splashScreenText.SetText("Created with raylib-cpp");
+    splashScreenText.SetColor(BLACK);
+    splashScreenText.SetFontSize(32);
+    splashScreenText.SetSpacing(2);
 
-    GuiSetStyle(DEFAULT, TEXT_SIZE, 30);
-    GuiLabel(raylib::Rectangle(216.0f, 568.0f, 352.0, 32.0f), "Created with Raylib-cpp.");
+    splashScreenText.Draw(raylib::Vector2(
+            m_Display.GetSize().x / 2.0f - splashScreenText.MeasureEx().x / 2.0f,
+            m_Display.GetSize().y / 2.0f + 160.0f
+        )
+    );
 } 

@@ -6,8 +6,8 @@
 
 Display::Display(raylib::Window& window) :
     m_Window(window),
-    WIDTH(786),
-    HEIGHT(786),
+    WIDTH(768),
+    HEIGHT(768),
     m_RenderTexture(WIDTH, HEIGHT) {
         m_RenderTexture.GetTexture().SetFilter(TEXTURE_FILTER_TRILINEAR);
     }

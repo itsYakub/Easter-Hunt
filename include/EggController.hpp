@@ -9,12 +9,13 @@
 #include "Egg.hpp"
 #include "Timer.hpp"
 #include "Display.hpp"
+#include "ColorList.hpp"
 
 class EggController {
 private:
     Display& m_Display;
     raylib::Texture2D m_EggTexture;
-    const std::array<raylib::Color, 8> m_EggColorList;
+    ColorList m_ColorList;
 
     std::vector<std::unique_ptr<Egg>> m_EggList;
 

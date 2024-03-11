@@ -12,7 +12,7 @@
 EggController::EggController(Display& display) :
     m_Display(display), 
     m_EggTexture("../res/txt/EasterHunt_Egg.png"),
-    m_EggColorList( { raylib::Color(108, 86, 113), raylib::Color(176, 169, 228), raylib::Color(249, 130, 132), raylib::Color(254, 170, 228), raylib::Color(172, 204, 228), raylib::Color(179, 227, 218), raylib::Color(176, 235, 147), raylib::Color(233, 245, 157) } ),
+    m_ColorList(),
     m_EggList(0), 
     m_EggSpawnDelayTime(2.0f), 
     m_EggSpawnDelayTimer(5.0f) { }
@@ -25,7 +25,7 @@ void EggController::Update() {
     m_EggSpawnDelayTimer.Process(m_Display.GetFrameTime());
 
     if(m_EggSpawnDelayTimer.Finished()) {
-        m_EggList.push_back(std::make_unique<Egg>(m_Display, m_EggTexture, m_EggColorList.at(GetRandomValue(0, m_EggColorList.size() - 1)), GetRandomValue(128, m_Display.GetSize().x - 128)));
+        m_EggList.push_back(std::make_unique<Egg>(m_Display, m_EggTexture, m_ColorList.GetRandomColor(), GetRandomValue(128, m_Display.GetSize().x - 128)));
         m_EggSpawnDelayTimer.Restart(m_EggSpawnDelayTime);
     }
 

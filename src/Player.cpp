@@ -12,7 +12,7 @@ Player::Player(Display& display) :
     m_Score(0),
     m_Lives(3),
     m_Enabled(false) { 
-        m_Texture.SetFilter(TEXTURE_FILTER_ANISOTROPIC_16X);
+        m_Texture.SetFilter(TEXTURE_FILTER_TRILINEAR);
     }
 
 void Player::OnEnable() {
@@ -24,6 +24,7 @@ void Player::Update() {
         return;
     }
 
+    // Left - right bounds behaviour
     if(m_BoundingRect.x + m_BoundingRect.width < 0.0f) {
         m_BoundingRect.x = m_Display.GetSize().x + m_BoundingRect.width;
     } else if(m_BoundingRect.x - m_BoundingRect.width > m_Display.GetSize().x) {
@@ -33,9 +34,11 @@ void Player::Update() {
     if(m_BoundingRect.y + m_BoundingRect.height >= m_Display.GetSize().y) {
         m_BoundingRect.y = m_Display.GetSize().y - m_BoundingRect.height;
         m_Velocity.y = m_Velocity.y / 1.5f * -1.0f;
+    } else if(m_BoundingRect.y < 0.0f) {
+        m_BoundingRect.y = Lerp(m_BoundingRect.y, 0.0f, m_Display.GetFrameTime());
     }
 
-    if(raylib::Keyboard::IsKeyDown(KEY_SPACE) && m_BoundingRect.y >= 0.0f) {
+    if((raylib::Keyboard::IsKeyDown(KEY_SPACE) || raylib::Keyboard::IsKeyDown(KEY_W) || raylib::Keyboard::IsKeyDown(KEY_UP) || raylib::Mouse::IsButtonDown(MOUSE_BUTTON_LEFT)) && m_BoundingRect.y >= 0.0f) {
         m_Velocity.y -= m_Gravity.y * 2.0f * GetFrameTime();
     }
 

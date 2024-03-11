@@ -10,7 +10,10 @@ SceneGameplay::SceneGameplay(Display& display, SceneMenager& sceneMenager) :
     m_Player(display),
     m_EggController(display),
     m_GameLogo("../res/txt/EasterHunt_Logo.png"),
-    m_LogoPosition(0.0f, 0.0f) {
+    m_LogoPosition(0.0f, 0.0f),
+    m_TooltipText(GetFontDefault(), "- - - Press SPACE to start - - -", 32, 2, BLACK),
+    m_TooltipPosition(raylib::Vector2(m_Display.GetSize().x / 2.0f - m_TooltipText.MeasureEx().x / 2.0, 512.0f)),
+    m_Background(display) {
         m_LogoPosition = raylib::Vector2(m_Display.GetSize().x / 2.0f, 128.0f);
 }
 
@@ -24,6 +27,7 @@ void SceneGameplay::Update() {
 
     else if(GameStarted()) {
         m_LogoPosition.y = Lerp(m_LogoPosition.y, -m_GameLogo.height, 0.8f * GetFrameTime());
+        m_TooltipPosition.y = Lerp(m_TooltipPosition.y, m_Display.GetSize().y + m_TooltipText.MeasureEx().y, 0.8f * GetFrameTime());
     }
 
     m_Player.Update();
@@ -41,13 +45,15 @@ void SceneGameplay::Update() {
         }
     }
 
-    
+    m_Background.Update();
 }   
 
 void SceneGameplay::Render() {
     ClearBackground(raylib::Color(172, 204, 228));
 
+    m_Background.Render();
     m_GameLogo.Draw(raylib::Vector2(m_LogoPosition.x - m_GameLogo.width / 2.0f, m_LogoPosition.y - m_GameLogo.height / 2.0f), WHITE);
+    m_TooltipText.Draw(m_TooltipPosition);
 
     m_Player.Render();
     m_EggController.Render();
