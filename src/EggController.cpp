@@ -9,9 +9,10 @@
 #include "Egg.hpp"
 #include "Timer.hpp"
 
-EggController::EggController(Display& display) :
+EggController::EggController(Display& display, Resources& resources) :
     m_Display(display), 
-    m_EggTexture("../res/txt/EasterHunt_Egg.png"),
+    m_Resources(resources),
+    m_EggTexture(m_Resources.GetTexture("EasterHunt_Egg")),
     m_ColorList(),
     m_EggList(0), 
     m_EggSpawnDelayTime(2.0f), 
@@ -29,8 +30,8 @@ void EggController::Update() {
         m_EggSpawnDelayTimer.Restart(m_EggSpawnDelayTime);
     }
 
-    for(int i = 0; i < m_EggList.size(); i++) {
-        m_EggList.at(i)->Update();
+    for(auto& i : m_EggList) {
+        i->Update();
     }
 
     m_EggSpawnDelayTime -= m_Display.GetFrameTime() * 0.02f;

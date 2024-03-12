@@ -8,19 +8,20 @@
 #include "SceneMenager.hpp"
 #include "SceneGameplay.hpp"
 
-SceneSplashScreen::SceneSplashScreen(Display& display, SceneMenager& sceneMenager) : 
+SceneSplashScreen::SceneSplashScreen(Display& display, Resources& resources, SceneMenager& sceneMenager) : 
     m_Display(display),
+    m_Resources(resources),
     m_SceneMenager(sceneMenager),
-    m_RaylibLogo("../res/raylib-cpp_256x256.png"),
+    m_RaylibLogo(m_Resources.GetTexture("raylib")),
     m_SwitchSceneTimer(5.0f) {
-        m_RaylibLogo.SetFilter(TEXTURE_FILTER_BILINEAR);
+        
 }
 
 void SceneSplashScreen::Update() {
     m_SwitchSceneTimer.Process(m_Display.GetFrameTime());
 
     if(m_SwitchSceneTimer.Finished() || raylib::Keyboard::GetKeyPressed()) {
-        m_SceneMenager.LoadScene(new SceneGameplay(m_Display, m_SceneMenager));
+        m_SceneMenager.LoadScene(new SceneGameplay(m_Display, m_Resources, m_SceneMenager));
     }
 }   
 

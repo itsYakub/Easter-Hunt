@@ -3,22 +3,24 @@
 #include "raylib-cpp.hpp"
 
 #include "Display.hpp"
+#include "Resources.hpp"
 #include "Timer.hpp"
 
 class Player {
 private:
     Display& m_Display;
+    Resources& m_Resources;
 
-    raylib::Texture2D m_Texture;
+    raylib::Texture2D& m_Texture;
     raylib::Rectangle m_BoundingRect;
 
-    raylib::Texture2D m_EggTexture;
-    raylib::Texture2D m_BrokenEggTexture;
+    raylib::Texture2D& m_EggTexture;
+    raylib::Texture2D& m_BrokenEggTexture;
 
-    raylib::Sound m_SoundBounce;
-    raylib::Sound m_SoundPickup;
+    raylib::Sound& m_SoundBounce;
+    raylib::Sound& m_SoundPickup;
 
-    raylib::Font m_Font;
+    raylib::Font& m_Font;
 
     const raylib::Vector2 m_Gravity;
     raylib::Vector2 m_Velocity;
@@ -37,7 +39,7 @@ private:
     bool m_Enabled;
 
 public:
-    Player(Display& display);
+    Player(Display& display, Resources& resources);
 
     void OnEnable();
     void Update();

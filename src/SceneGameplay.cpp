@@ -4,19 +4,18 @@
 
 #include "SceneMenager.hpp"
 
-SceneGameplay::SceneGameplay(Display& display, SceneMenager& sceneMenager) : 
+SceneGameplay::SceneGameplay(Display& display, Resources& resources, SceneMenager& sceneMenager) : 
     m_Display(display),
+    m_Resources(resources),
     m_SceneMenager(sceneMenager),
-    m_Player(display),
-    m_EggController(display),
-    m_GameLogo("../res/txt/EasterHunt_Logo.png"),
+    m_Player(display, resources),
+    m_EggController(display, resources),
+    m_GameLogo(m_Resources.GetTexture("EasterHunt_Logo")),
     m_LogoPosition(0.0f, 0.0f),
-    m_Font("../res/font/Varela_Round/VarelaRound-Regular.ttf"),
+    m_Font(m_Resources.GetFont("VarelaRound")),
     m_TooltipText(m_Font, "- - - Press SPACE to start - - -", 32, 2, BLACK),
     m_TooltipPosition(raylib::Vector2(m_Display.GetSize().x / 2.0f - m_TooltipText.MeasureEx().x / 2.0, 512.0f)),
     m_Background(display) {
-        m_GameLogo.SetFilter(TEXTURE_FILTER_BILINEAR);
-        m_Font.GetTexture().SetFilter(TEXTURE_FILTER_BILINEAR);
         m_LogoPosition = raylib::Vector2(m_Display.GetSize().x / 2.0f, 128.0f);
 }
 
@@ -36,7 +35,7 @@ void SceneGameplay::Update() {
     m_Player.Update();
     m_EggController.Update();
 
-    for(int i = 0; i < m_EggController.GetEggList().size(); i++) {
+    for(int i = 0; i < static_cast<int>(m_EggController.GetEggList().size()); i++) {
         auto egg = m_EggController.GetEggList().at(i).get();
 
         if(m_Player.GetRectangle().CheckCollision(egg->GetRectangle())) {

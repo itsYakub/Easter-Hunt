@@ -9,12 +9,15 @@
 #include "Egg.hpp"
 #include "Timer.hpp"
 #include "Display.hpp"
+#include "Resources.hpp"
 #include "ColorList.hpp"
 
 class EggController {
 private:
     Display& m_Display;
-    raylib::Texture2D m_EggTexture;
+    Resources& m_Resources;
+
+    raylib::Texture2D& m_EggTexture;
     ColorList m_ColorList;
 
     std::vector<std::unique_ptr<Egg>> m_EggList;
@@ -25,7 +28,7 @@ private:
     bool m_Enabled;
 
 public:
-    EggController(Display& display);
+    EggController(Display& display, Resources& resources);
 
     void Update();
     void Render();

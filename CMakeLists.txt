@@ -17,6 +17,7 @@ set(
     ${CMAKE_SOURCE_DIR}/src/Display.cpp    
     ${CMAKE_SOURCE_DIR}/src/Background.cpp    
     ${CMAKE_SOURCE_DIR}/src/ColorList.cpp    
+    ${CMAKE_SOURCE_DIR}/src/Resources.cpp    
 )
 
 set(
@@ -37,7 +38,18 @@ set(
     -lraylib
 )
 
+set(
+    COMPILE_OPTIONS
+    -std=c++20
+    -Wall
+    -Werror
+    -Wextra
+    -Wpedantic
+    -O2
+)
+
 add_executable(${PROJECT_NAME} ${SOURCES})
+target_compile_options(${PROJECT_NAME} PRIVATE ${COMPILE_OPTIONS})
 target_include_directories(${PROJECT_NAME} PRIVATE ${INCLUDE_DIRECTORIES})
 target_link_directories(${PROJECT_NAME} PRIVATE ${LINK_DIRECTORIES})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${LINK_LIBRARIES})

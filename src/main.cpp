@@ -10,6 +10,8 @@
 #include "SceneMenager.hpp"
 #include "SceneSplashScreen.hpp"
 
+#include "Resources.hpp"
+
 class Game {
 private:
     const int WINDOW_WIDTH, DISPLAY_WIDTH;
@@ -19,6 +21,7 @@ private:
     raylib::Window window;
     raylib::AudioDevice audio;
     Display display;
+    Resources resources;
     SceneMenager sceneMenager;
 
 public:
@@ -29,9 +32,10 @@ public:
         window(WINDOW_WIDTH, WINDOW_HEIGHT, TITLE, FLAG_VSYNC_HINT | FLAG_WINDOW_RESIZABLE | FLAG_MSAA_4X_HINT | FLAG_WINDOW_MAXIMIZED),
         audio(),
         display(window, DISPLAY_WIDTH, DISPLAY_HEIGHT, TEXTURE_FILTER_TRILINEAR),
+        resources(),
         sceneMenager() {
             window.Maximize();
-            sceneMenager.LoadScene(new SceneSplashScreen(display, sceneMenager));
+            sceneMenager.LoadScene(new SceneSplashScreen(display, resources, sceneMenager));
         }
 
     void Run() {
@@ -57,7 +61,7 @@ private:
     }
 };
 
-int main(int argc, char** argv) {
+int main(int, char**) {
     Game game;
     game.Run();
 

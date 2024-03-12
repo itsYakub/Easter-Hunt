@@ -4,15 +4,16 @@
 
 #include "raylib-cpp.hpp"
 
-Player::Player(Display& display) : 
+Player::Player(Display& display, Resources& resources) : 
     m_Display(display),
-    m_Texture("../res/txt/EasterHunt_Bunny.png"),
+    m_Resources(resources),
+    m_Texture(m_Resources.GetTexture("EasterHunt_Bunny")),
     m_BoundingRect(m_Display.GetSize().x / 2.0f - m_Texture.width / 2.0f, m_Display.GetSize().y / 2.0f - m_Texture.height / 2.0f, m_Texture.width, m_Texture.height),
-    m_EggTexture("../res/txt/EasterHunt_Egg.png"),
-    m_BrokenEggTexture("../res/txt/EasterHunt_BrokenEgg.png"),
-    m_SoundBounce("../res/sfx/EasterHunt_SoundBounce.wav"),
-    m_SoundPickup("../res/sfx/EasterHunt_SoundPickup.wav"),
-    m_Font("../res/font/Varela_Round/VarelaRound-Regular.ttf"),
+    m_EggTexture(m_Resources.GetTexture("EasterHunt_Egg")),
+    m_BrokenEggTexture(m_Resources.GetTexture("EasterHunt_BrokenEgg")),
+    m_SoundBounce(m_Resources.GetSound("EasterHunt_SoundBounce")),
+    m_SoundPickup(m_Resources.GetSound("EasterHunt_SoundPickup")),
+    m_Font(m_Resources.GetFont("VarelaRound")),
     m_Gravity(0.0f, 9.81f * 2),
     m_Velocity(0.0f, 0.0f),
     m_VelocityFactor(1.0f),
@@ -23,10 +24,7 @@ Player::Player(Display& display) :
     LIVES_MAX(5),
     m_Lives(LIVES_MAX),
     m_Enabled(false) { 
-        m_Texture.SetFilter(TEXTURE_FILTER_BILINEAR);
-        m_EggTexture.SetFilter(TEXTURE_FILTER_BILINEAR);
-        m_BrokenEggTexture.SetFilter(TEXTURE_FILTER_BILINEAR);
-        m_Font.GetTexture().SetFilter(TEXTURE_FILTER_BILINEAR);
+        
     }
 
 void Player::OnEnable() {
@@ -139,6 +137,8 @@ void Player::RenderLives() {
             m_EggTexture.Draw(
                 raylib::Rectangle(raylib::Vector2::Zero(), m_EggTexture.GetSize()),
                 raylib::Rectangle(raylib::Vector2(64.0f, m_Display.GetSize().y - 64.0f * (i + 1)), m_EggTexture.GetSize()),
+                // raylib::Rectangle(raylib::Vector2(64.0f * (i + 1), m_Display.GetSize().y - 64.0f), m_EggTexture.GetSize()),
+                // raylib::Rectangle(raylib::Vector2(64.0f * (i + 1), 64.0f), m_EggTexture.GetSize()),
                 raylib::Vector2(m_EggTexture.GetSize()) / 2.0f,
                 0.0f,
                 WHITE
