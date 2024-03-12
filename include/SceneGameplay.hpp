@@ -22,6 +22,7 @@ private:
     raylib::Texture2D m_GameLogo;
     raylib::Vector2 m_LogoPosition;
 
+    raylib::Font m_Font;
     raylib::Text m_TooltipText;
     raylib::Vector2 m_TooltipPosition;
 

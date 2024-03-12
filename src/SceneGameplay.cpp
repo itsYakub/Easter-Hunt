@@ -11,10 +11,12 @@ SceneGameplay::SceneGameplay(Display& display, SceneMenager& sceneMenager) :
     m_EggController(display),
     m_GameLogo("../res/txt/EasterHunt_Logo.png"),
     m_LogoPosition(0.0f, 0.0f),
-    m_TooltipText(GetFontDefault(), "- - - Press SPACE to start - - -", 32, 2, BLACK),
+    m_Font("../res/font/Varela_Round/VarelaRound-Regular.ttf"),
+    m_TooltipText(m_Font, "- - - Press SPACE to start - - -", 32, 2, BLACK),
     m_TooltipPosition(raylib::Vector2(m_Display.GetSize().x / 2.0f - m_TooltipText.MeasureEx().x / 2.0, 512.0f)),
     m_Background(display) {
         m_GameLogo.SetFilter(TEXTURE_FILTER_BILINEAR);
+        m_Font.GetTexture().SetFilter(TEXTURE_FILTER_BILINEAR);
         m_LogoPosition = raylib::Vector2(m_Display.GetSize().x / 2.0f, 128.0f);
 }
 
