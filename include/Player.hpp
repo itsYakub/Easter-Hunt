@@ -64,4 +64,6 @@ private:
     void RenderPlayer();
     void RenderLives();
     void RednerScore();
+
+    int GetInput();
 };

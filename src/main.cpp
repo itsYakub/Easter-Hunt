@@ -1,5 +1,7 @@
 // External links:
 // > Color Palette: https://lospec.com/palette-list/vanilla-milkshake
+// > Egg Crack SFX: https://www.soundsnap.com/tags/egg
+// > Background OST: https://soundcloud.com/dream-story-studio
 
 #include <string>
 
@@ -31,15 +33,16 @@ public:
         TITLE("Raylib 5.0.0 - Easter Hunt 1.0.0"),
         window(WINDOW_WIDTH, WINDOW_HEIGHT, TITLE, FLAG_VSYNC_HINT | FLAG_WINDOW_RESIZABLE | FLAG_MSAA_4X_HINT | FLAG_WINDOW_MAXIMIZED),
         audio(),
-        display(window, DISPLAY_WIDTH, DISPLAY_HEIGHT, TEXTURE_FILTER_TRILINEAR),
+        display(window, DISPLAY_WIDTH, DISPLAY_HEIGHT, TEXTURE_FILTER_BILINEAR),
         resources(),
         sceneMenager() {
+            window.SetExitKey(0);
             window.Maximize();
             sceneMenager.LoadScene(new SceneSplashScreen(display, resources, sceneMenager));
         }
 
     void Run() {
-        while(!window.ShouldClose()) {
+        while(!window.ShouldClose() && !display.ShouldClose()) {
             Update();
             Render();
         }

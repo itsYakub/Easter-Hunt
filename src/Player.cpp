@@ -107,8 +107,8 @@ void Player::UpdateComponents() {
         m_Velocity.y -= m_Gravity.y * 2.0f * m_Display.GetFrameTime() * m_VelocityFactor;
     }
 
-    m_Velocity.x = Lerp(m_Velocity.x, 8.0f * (raylib::Keyboard::IsKeyDown(KEY_D) - raylib::Keyboard::IsKeyDown(KEY_A)), 2.0f * m_Display.GetFrameTime()) * m_VelocityFactor;
-    m_Rotation = Lerp(m_Rotation, 30.0f * (raylib::Keyboard::IsKeyDown(KEY_D) - raylib::Keyboard::IsKeyDown(KEY_A)), 2.0f * m_Display.GetFrameTime()) * m_VelocityFactor;
+    m_Velocity.x = Lerp(m_Velocity.x, 8.0f * GetInput(), 2.0f * m_Display.GetFrameTime()) * m_VelocityFactor;
+    m_Rotation = Lerp(m_Rotation, 30.0f * GetInput(), 2.0f * m_Display.GetFrameTime()) * m_VelocityFactor;
     m_VelocityFactor = Lerp(m_VelocityFactor, 1.0f, 2.0f * m_Display.GetFrameTime());
 
     m_GracePeriodTimer.Process(m_Display.GetFrameTime());
@@ -164,8 +164,17 @@ void Player::RednerScore() {
         scoreText.font = m_Font;
         scoreText.fontSize = 32;
         scoreText.color = BLACK;
-        
+
         scoreText.Draw(raylib::Vector2(m_Display.GetSize().x / 2.0f - scoreText.MeasureEx().x / 2.0f, 16.0f));
     }
 }
 
+int Player::GetInput() {
+    if(raylib::Keyboard::IsKeyDown(KEY_D) || raylib::Keyboard::IsKeyDown(KEY_RIGHT)) {
+        return 1;
+    } else if(raylib::Keyboard::IsKeyDown(KEY_A) || raylib::Keyboard::IsKeyDown(KEY_LEFT)) {
+        return -1;
+    } else {
+        return 0;
+    }
+}

@@ -8,7 +8,8 @@ Display::Display(raylib::Window& window) :
     m_Window(window),
     WIDTH(768),
     HEIGHT(768),
-    m_RenderTexture(WIDTH, HEIGHT) {
+    m_RenderTexture(WIDTH, HEIGHT),
+    m_SouldClose(false) {
         m_RenderTexture.GetTexture().SetFilter(TEXTURE_FILTER_BILINEAR);
     }
 
@@ -16,7 +17,8 @@ Display::Display(raylib::Window& window, const int width, const int height) :
     m_Window(window),
     WIDTH(width),
     HEIGHT(height),
-    m_RenderTexture(WIDTH, HEIGHT) { 
+    m_RenderTexture(WIDTH, HEIGHT),
+    m_SouldClose(false) { 
         m_RenderTexture.GetTexture().SetFilter(TEXTURE_FILTER_TRILINEAR);
     }
 
@@ -24,11 +26,10 @@ Display::Display(raylib::Window& window, const int width, const int height, cons
     m_Window(window),
     WIDTH(width),
     HEIGHT(height),
-    m_RenderTexture(WIDTH, HEIGHT) { 
+    m_RenderTexture(WIDTH, HEIGHT),
+    m_SouldClose(false) { 
         m_RenderTexture.GetTexture().SetFilter(filter);
     }
-
-
 
 Display& Display::Update() {
     raylib::Mouse::SetOffset(-(m_Window.GetSize().x - (WIDTH * Scale())) * 0.5f, -(m_Window.GetSize().y - (HEIGHT * Scale())) * 0.5f);
@@ -67,6 +68,14 @@ raylib::Vector2 Display::GetSize() {
 
 float Display::GetFrameTime() {
     return m_Window.GetFrameTime();
+}
+
+bool Display::ShouldClose() {
+    return m_SouldClose;
+}
+
+void Display::CloseCallback() {
+    m_SouldClose = true;
 }
 
 float Display::Scale() {
