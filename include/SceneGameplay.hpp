@@ -24,6 +24,7 @@ private:
     raylib::Texture2D& m_GameOverScreen;
     raylib::Font& m_Font;
     raylib::Music& m_BackgroundMusic;
+    raylib::Sound& m_SoundPickup;
     raylib::Sound& m_EggCrackSound;
 
     enum State {

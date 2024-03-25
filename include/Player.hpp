@@ -18,7 +18,6 @@ private:
     raylib::Texture2D& m_BrokenEggTexture;
 
     raylib::Sound& m_SoundBounce;
-    raylib::Sound& m_SoundPickup;
 
     raylib::Font& m_Font;
 

@@ -39,14 +39,12 @@ public:
             window.SetExitKey(0);
             window.Maximize();
             sceneMenager.LoadScene(new SceneSplashScreen(display, resources, sceneMenager));
-        }
 
-    void Run() {
-        while(!window.ShouldClose() && !display.ShouldClose()) {
-            Update();
-            Render();
+            while(!window.ShouldClose() && !display.ShouldClose()) {
+                Update();
+                Render();
+            }
         }
-    }
 
 private:
     void Update() {
@@ -66,7 +64,6 @@ private:
 
 int main(int, char**) {
     Game game;
-    game.Run();
 
     return 0;
 }

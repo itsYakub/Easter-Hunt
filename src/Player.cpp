@@ -12,7 +12,6 @@ Player::Player(Display& display, Resources& resources) :
     m_EggTexture(m_Resources.GetTexture("EasterHunt_Egg")),
     m_BrokenEggTexture(m_Resources.GetTexture("EasterHunt_BrokenEgg")),
     m_SoundBounce(m_Resources.GetSound("EasterHunt_SoundBounce")),
-    m_SoundPickup(m_Resources.GetSound("EasterHunt_SoundPickup")),
     m_Font(m_Resources.GetFont("VarelaRound")),
     m_Gravity(0.0f, 9.81f * 2),
     m_Velocity(0.0f, 0.0f),
@@ -61,7 +60,6 @@ raylib::Rectangle Player::GetRectangle() const {
 
 void Player::IncrementScore() {
     m_Score++;
-    m_SoundPickup.Play();
 }
 
 void Player::DecrementLives() {
@@ -69,6 +67,7 @@ void Player::DecrementLives() {
         m_Lives--;
         m_GracePeriodTimer.Restart(GRACE_PERIOD_TIME);
     }
+
 }
 
 int Player::GetScore() const {

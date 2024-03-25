@@ -1,0 +1,21 @@
+<svg width="768" height="768" viewBox="0 0 768 768" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="768" height="768" fill="#D4DF8F"/>
+<rect width="128" height="128" fill="#DBE694"/>
+<rect x="256" width="128" height="128" fill="#DBE694"/>
+<rect x="512" width="128" height="128" fill="#DBE694"/>
+<rect x="128" y="128" width="128" height="128" fill="#DBE694"/>
+<rect x="384" y="128" width="128" height="128" fill="#DBE694"/>
+<rect x="640" y="128" width="128" height="128" fill="#DBE694"/>
+<rect y="256" width="128" height="128" fill="#DBE694"/>
+<rect x="256" y="256" width="128" height="128" fill="#DBE694"/>
+<rect x="512" y="256" width="128" height="128" fill="#DBE694"/>
+<rect x="128" y="384" width="128" height="128" fill="#DBE694"/>
+<rect x="384" y="384" width="128" height="128" fill="#DBE694"/>
+<rect x="640" y="384" width="128" height="128" fill="#DBE694"/>
+<rect y="512" width="128" height="128" fill="#DBE694"/>
+<rect x="256" y="512" width="128" height="128" fill="#DBE694"/>
+<rect x="512" y="512" width="128" height="128" fill="#DBE694"/>
+<rect x="128" y="640" width="128" height="128" fill="#DBE694"/>
+<rect x="384" y="640" width="128" height="128" fill="#DBE694"/>
+<rect x="640" y="640" width="128" height="128" fill="#DBE694"/>
+</svg>

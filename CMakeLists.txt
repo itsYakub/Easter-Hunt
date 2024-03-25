@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
-project(easter_hunt)
+project(easter_hunt VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -25,7 +25,6 @@ set(
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/lib/raylib-cpp/include
     ${CMAKE_SOURCE_DIR}/lib/raylib-cpp/bin/_deps/raylib-src/src
-    ${CMAKE_SOURCE_DIR}/lib/raygui/src
 )
 
 set(

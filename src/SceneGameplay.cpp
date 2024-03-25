@@ -12,6 +12,7 @@ SceneGameplay::SceneGameplay(Display& display, Resources& resources, SceneMenage
     m_GameOverScreen(m_Resources.GetTexture("EasterHunt_GameOverScreen")),
     m_Font(m_Resources.GetFont("VarelaRound")),
     m_BackgroundMusic(m_Resources.GetMusic("intro")),
+    m_SoundPickup(m_Resources.GetSound("EasterHunt_SoundPickup")),
     m_EggCrackSound(m_Resources.GetSound("egg-shell-crush")),
     m_GameplayState(STATE_BEGIN),
     m_Player(display, resources),
@@ -22,7 +23,7 @@ SceneGameplay::SceneGameplay(Display& display, Resources& resources, SceneMenage
     m_TooltipText(m_Font, "- - - Press SPACE to start - - -", 32, 2, BLACK),
     m_TooltipPosition(raylib::Vector2(m_Display.GetSize().x / 2.0f - m_TooltipText.MeasureEx().x / 2.0, 512.0f)),
     m_Background(display, resources),
-    m_Volume(0.8f),
+    m_Volume(0.5f),
     m_GameplayTime(0.0f) {
         m_LogoPosition = raylib::Vector2(m_Display.GetSize().x / 2.0f, 128.0f);
         m_BackgroundMusic.SetLooping(true);
@@ -35,6 +36,8 @@ void SceneGameplay::Update() {
     switch(m_GameplayState) {
         case STATE_BEGIN:
             m_BackgroundMusic.SetVolume(m_Volume);
+            m_SoundPickup.SetVolume(m_Volume);
+            m_EggCrackSound.SetVolume(m_Volume);
 
             if(IsKeyPressed(KEY_SPACE) && (!GameStarted())) {
                 m_Player.Enable();
@@ -58,6 +61,8 @@ void SceneGameplay::Update() {
                 if(m_Player.GetRectangle().CheckCollision(egg->GetRectangle())) {
                     m_EggController.EggListPopAtIndex(i);
                     m_Player.IncrementScore();
+
+                    m_SoundPickup.Play();
                 }
 
                 if(egg->GetRectangle().y > m_Display.GetSize().y) {
