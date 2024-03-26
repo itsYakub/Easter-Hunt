@@ -98,19 +98,19 @@ make
     📖 Credits 📖
 </h2>
 <ul type="disc">
-    <li>RobLoach/raylib-cpp: <br>
+    <li> <strong>RobLoach/raylib-cpp: </strong><br>
     <a href="https://github.com/RobLoach/raylib-cpp/tree/master ">https://github.com/RobLoach/raylib-cpp/tree/master </a>
-    <li>Vanilla Milkshake Palette: <br>
+    <li> <strong>Vanilla Milkshake Palette: </strong><br>
      <a href="https://lospec.com/palette-list/vanilla-milkshake">https://lospec.com/palette-list/vanilla-milkshake</a>
-    <li> Egg SFX: <br>
+    <li> <strong>Egg SFX: </strong><br>
     <a href="https://www.soundsnap.com/tags/egg">https://www.soundsnap.com/tags/egg</a>
-    <li> raysan5/rfxgen: <br>
+    <li> <strong>raysan5/rfxgen: </strong><br>
     <a href="https://raylibtech.itch.io/rfxgen">https://raylibtech.itch.io/rfxgen</a>
-    <li> Background OST: <br>
+    <li> <strong>Background OST: </strong><br>
     <a href="https://soundcloud.com/dream-story-studio">https://soundcloud.com/dream-story-studio</a>
-    <li> Varela Round font: <br>
+    <li> <strong>Varela Round font: </strong><br>
     <a href="https://fonts.google.com/specimen/Varela+Round">https://fonts.google.com/specimen/Varela+Round</a>
-    <li> Figma: <br>
+    <li> <strong>Figma: </strong><br>
     <a href="https://www.figma.com">https://www.figma.com</a>
 </ul>
 
@@ -118,5 +118,5 @@ make
     ❗ LICENCE ❗
 </h2>
 <p align="center">
-    This project is under the <a href="https://github.com/itsYakub/Easter-Hunt/blob/main/LICENCE">MIT Licence</a>
+    This project is under the <strong><a href="https://github.com/itsYakub/Easter-Hunt/blob/main/LICENCE">MIT Licence</a></strong>
 </p>
