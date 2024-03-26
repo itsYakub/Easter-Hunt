@@ -10,7 +10,7 @@
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black) 
 [![Ko-Fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/yakub) 
 
-<div>
+</div>
 
 <p align="center">
 <strong>🐣 Easter Hunt</strong> is a small 2D game created with <a href="https://github.com/RobLoach/raylib-cpp">RobLoach/raylib-cpp</a> for the Easter Season!🐰 <br> <br>
