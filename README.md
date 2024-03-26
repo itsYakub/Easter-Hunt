@@ -2,11 +2,13 @@
     🥚 Easter Hunt 🐰
 </h1>
 
-![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
-[![Itch.io](https://img.shields.io/badge/Itch-%23FF0B34.svg?style=for-the-badge&logo=Itch.io&logoColor=white)](https://itsyakub.itch.io/easter-hunt)
-![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-[![Ko-Fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/yakub)
+<div align="center">
+![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white) 
+[![Itch.io](https://img.shields.io/badge/Itch-%23FF0B34.svg?style=for-the-badge&logo=Itch.io&logoColor=white)](https://itsyakub.itch.io/easter-hunt) 
+![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white) 
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black) 
+[![Ko-Fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/yakub) 
+<div>
 
 <p align="center">
 <strong>🐣 Easter Hunt</strong> is a small 2D game created with <a href="https://github.com/RobLoach/raylib-cpp">RobLoach/raylib-cpp</a> for the Easter Season!🐰 <br> <br>
@@ -24,7 +26,7 @@ Your objective is to catch as many falling, colorful eggs as possible flying as 
             <li> <strong>Git:</strong> <a href="https://git-scm.com/">https://git-scm.com/</a>
         </ul>
     <li> <strong>Manual Installation:</strong>
-        <ol>
+        <ol type="1">
             <li> Open the <strong> RELEASE </strong> page from this repository / open the <strong><a href="https://itsyakub.itch.io/easter-hunt">Itch.io</a></strong> page.
             <li> Select your desired release.
             <li> Unzip the archive file.
@@ -33,7 +35,7 @@ Your objective is to catch as many falling, colorful eggs as possible flying as 
         </ol> 
     </li>
     <li> <strong>Building from scratch:</strong>
-        <ol>
+        <ol type="1">
             <li> Clone the <strong><a href="https://github.com/itsYakub/Easter-Hunt">Github Repository</a></strong> / Download the <strong><a href="https://itsyakub.itch.io/easter-hunt">Source Code from the Itch Page</a></strong>.
             <li> Go to the project's directory: 
 <pre>
