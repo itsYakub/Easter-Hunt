@@ -1,8 +1,3 @@
-// External links:
-// > Color Palette: https://lospec.com/palette-list/vanilla-milkshake
-// > Egg Crack SFX: https://www.soundsnap.com/tags/egg
-// > Background OST: https://soundcloud.com/dream-story-studio
-
 #include <string>
 
 #include "raylib-cpp.hpp"
