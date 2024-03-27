@@ -57,33 +57,15 @@ set(
     ${CMAKE_SOURCE_DIR}/lib/raylib-cpp/bin/_deps/raylib-build/raylib
 )
 
-if (CMAKE_SYSTEM_NAME STREQUAL "Windows") 
-    set(
-        COMPILE_OPTIONS
-        -std=c++20
-        -Wall
-        -Werror
-        -Wextra
-        -Wpedantic
-        -O2
-        -static-libgcc
-        -static-libstdc++
-        -static
-        -mwindows
-    )
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    set(
-        COMPILE_OPTIONS
-        -std=c++20
-        -Wall
-        -Werror
-        -Wextra
-        -Wpedantic
-        -O2
-        -static-libgcc
-        -static-libstdc++
-    )
-endif()
+set(
+    COMPILE_OPTIONS
+    -std=c++20
+    -Wall
+    -Werror
+    -Wextra
+    -Wpedantic
+    -O2
+)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
@@ -93,7 +75,11 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${INCLUDE_DIRECTORIES})
 target_link_directories(${PROJECT_NAME} PRIVATE ${LINK_DIRECTORIES})
 
 if (CMAKE_SYSTEM_NAME STREQUAL "Windows") 
+    target_link_options(${PROJECT_NAME} PRIVATE -static -static-libgcc -static-libstdc++)
     target_link_libraries(${PROJECT_NAME} PRIVATE -lraylib -lgdi32 -lwinmm)
+
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    target_link_options(${PROJECT_NAME} PRIVATE -static-libgcc -static-libstdc++)
     target_link_libraries(${PROJECT_NAME} PRIVATE -lraylib)
+
 endif()
