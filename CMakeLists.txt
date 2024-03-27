@@ -68,6 +68,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
         -O2
         -static-libgcc
         -static-libstdc++
+        -static
         -mwindows
     )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
