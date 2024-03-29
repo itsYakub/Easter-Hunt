@@ -31,6 +31,7 @@ public:
         display(window, DISPLAY_WIDTH, DISPLAY_HEIGHT, TEXTURE_FILTER_BILINEAR),
         resources(),
         sceneMenager() {
+            window.SetIcon(resources.GetTexture("EasterHunt_Icon"));
             window.SetExitKey(0);
             window.Maximize();
             sceneMenager.LoadScene(new SceneSplashScreen(display, resources, sceneMenager));
