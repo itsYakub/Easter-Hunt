@@ -38,7 +38,7 @@ Your objective is to catch as many falling, colorful eggs as possible flying as 
     </li>
     <li> <strong>Building from scratch:</strong>
         <ol type="1">
-            <li> Clone the <strong><a href="https://github.com/itsYakub/Easter-Hunt">Github Repository</a></strong> / Download the <strong><a href="https://itsyakub.itch.io/easter-hunt">Source Code from the Itch Page</a></strong>.
+            <li> Clone the <strong><a href="https://github.com/itsYakub/Easter-Hunt">Github Repository</a></strong></strong>.
 <pre>
 git clone https://github.com/itsYakub/Easter-Hunt.git --depth=1 --branch=main
 </pre>
