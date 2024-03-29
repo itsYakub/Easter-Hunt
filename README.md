@@ -39,6 +39,9 @@ Your objective is to catch as many falling, colorful eggs as possible flying as 
     <li> <strong>Building from scratch:</strong>
         <ol type="1">
             <li> Clone the <strong><a href="https://github.com/itsYakub/Easter-Hunt">Github Repository</a></strong> / Download the <strong><a href="https://itsyakub.itch.io/easter-hunt">Source Code from the Itch Page</a></strong>.
+<pre>
+git clone https://github.com/itsYakub/Easter-Hunt.git --depth=1 --branch=main
+</pre>
             <li> Go to the project's directory: 
 <pre>
 cd Easter-Hunt
@@ -53,7 +56,7 @@ cd lib/raylib
 mkdir bin
 cd bin
 cmake .. -G "Unix Makefiles"
-make 
+cmake --build .
 </pre>
             <li> Go back to the main project directory and build the game: <br>
 <pre>
@@ -61,7 +64,7 @@ cd ../../..
 mkdir bin
 cd bin
 cmake .. -G "Unix Makefiles"
-make 
+cmake --build .
 </pre>
             <li> Run the executable.
         </ol>
