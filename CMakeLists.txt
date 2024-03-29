@@ -23,7 +23,7 @@
 # OR OTHER DEALINGS IN THE SOFTWARE.
 # ===============================================================================
 
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.14)    
 project(easter_hunt VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -69,16 +69,18 @@ set(
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-target_compile_options(${PROJECT_NAME} PRIVATE ${COMPILE_OPTIONS})
-
 target_include_directories(${PROJECT_NAME} PRIVATE ${INCLUDE_DIRECTORIES})
 target_link_directories(${PROJECT_NAME} PRIVATE ${LINK_DIRECTORIES})
 
 if (CMAKE_SYSTEM_NAME STREQUAL "Windows") 
-    target_link_options(${PROJECT_NAME} PRIVATE -static -static-libgcc -static-libstdc++)
+    target_compile_options(${PROJECT_NAME} PRIVATE ${COMPILE_OPTIONS} -mwindows)
+    
+    target_link_options(${PROJECT_NAME} PRIVATE -static)
     target_link_libraries(${PROJECT_NAME} PRIVATE -lraylib -lgdi32 -lwinmm)
 
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    target_compile_options(${PROJECT_NAME} PRIVATE ${COMPILE_OPTIONS})
+
     target_link_options(${PROJECT_NAME} PRIVATE -static-libgcc -static-libstdc++)
     target_link_libraries(${PROJECT_NAME} PRIVATE -lraylib)
 

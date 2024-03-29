@@ -34,3 +34,5 @@
 # Build directories
 build/
 bin/
+bin_unix/
+bin_win/
